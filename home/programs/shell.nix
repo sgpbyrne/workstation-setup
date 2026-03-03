@@ -110,10 +110,23 @@
       top = "btop";
       du = "dust";
 
-      # Git shortcuts
+      # Git
       gs = "git status";
+      gst = "git status";
       gd = "git diff";
+      gds = "git diff --staged";
       gl = "git log --oneline --graph";
+      ga = "git add";
+      gaa = "git add --all";
+      gcm = "git commit -m";
+      gca = "git commit --amend";
+      gp = "git push";
+      gpl = "git pull";
+      gco = "git checkout";
+      gcb = "git checkout -b";
+      gss = "git stash";
+      gsp = "git stash pop";
+      grb = "git rebase";
 
       # Kubernetes
       k = "kubectl";
