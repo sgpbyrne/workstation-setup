@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, username, ... }:
 
 {
   imports = [
@@ -6,8 +6,8 @@
   ];
 
   home = {
-    username = "sgpbyrne";
-    homeDirectory = "/Users/sgpbyrne";
+    username = username;
+    homeDirectory = "/Users/${username}";
     stateVersion = "24.11";
     packages = with pkgs; [ ];
   };

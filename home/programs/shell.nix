@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, configName, ... }:
 
 {
   # Starship prompt
@@ -123,7 +123,7 @@
       kgs = "kubectl get svc";
 
       # Nix
-      rebuild = "sudo darwin-rebuild switch --flake ~/laptop-config#Seans-MacBook-Air";
+      rebuild = "sudo darwin-rebuild switch --flake ~/dev/workstation-setup#${configName}";
 
       # Python
       python = "python3";

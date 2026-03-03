@@ -34,45 +34,80 @@
       mac-app-util,
       ...
     }:
+    let
+      hosts = import ./hosts-config.nix;
+
+      mkDarwin =
+        name:
+        {
+          hostname,
+          username,
+          gitName,
+          gitEmail,
+          hostDir,
+          system ? "aarch64-darwin",
+        }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              self
+              hostname
+              username
+              gitName
+              gitEmail
+              ;
+            configName = name;
+          };
+          modules = [
+            hostDir
+
+            # VS Code extensions overlay
+            {
+              nixpkgs.overlays = [
+                inputs.nix-vscode-extensions.overlays.default
+              ];
+            }
+
+            # Homebrew integration
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                user = username;
+                autoMigrate = true;
+              };
+            }
+
+            # Spotlight indexing for Nix-installed apps
+            mac-app-util.darwinModules.default
+
+            # Home Manager
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "hm-backup";
+                users.${username} = import ./home;
+                extraSpecialArgs = {
+                  inherit
+                    inputs
+                    hostname
+                    username
+                    gitName
+                    gitEmail
+                    ;
+                  configName = name;
+                };
+              };
+            }
+          ];
+        };
+    in
     {
-      darwinConfigurations."Seans-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs self; };
-        modules = [
-          ./hosts/macbook-air
-
-          # VS Code extensions overlay (evaluates in our nixpkgs with allowUnfree)
-          {
-            nixpkgs.overlays = [
-              inputs.nix-vscode-extensions.overlays.default
-            ];
-          }
-
-          # Homebrew integration
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              user = "sgpbyrne";
-              autoMigrate = true;
-            };
-          }
-
-          # Spotlight indexing for Nix-installed apps
-          mac-app-util.darwinModules.default
-
-          # Home Manager as a nix-darwin module
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "hm-backup";
-              users.sgpbyrne = import ./home;
-              extraSpecialArgs = { inherit inputs; };
-            };
-          }
-        ];
-      };
+      darwinConfigurations."personal-mac" = mkDarwin "personal-mac" hosts.personal-mac;
+      darwinConfigurations."work-mac" = mkDarwin "work-mac" hosts.work-mac;
     };
 }

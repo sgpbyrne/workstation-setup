@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, gitName, gitEmail, ... }:
 
 {
   programs.git = {
@@ -6,8 +6,8 @@
 
     settings = {
       user = {
-        name = "Sean Byrne";
-        email = "sgpbyrne@gmail.com";
+        name = gitName;
+        email = gitEmail;
       };
       init.defaultBranch = "main";
       pull.rebase = true;

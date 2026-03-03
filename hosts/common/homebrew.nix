@@ -3,12 +3,12 @@
 {
   homebrew = {
     enable = true;
-
     onActivation = {
       cleanup = "zap";
       autoUpdate = true;
       upgrade = true;
     };
+    global.autoUpdate = false;
 
     taps = [
       "nikitabobko/tap"
@@ -20,13 +20,10 @@
       "raycast"
       "orbstack"
       "1password"
-      "obsidian"
     ];
 
     brews = [
       "azure-cli"
     ];
-
-    global.autoUpdate = false;
   };
 }

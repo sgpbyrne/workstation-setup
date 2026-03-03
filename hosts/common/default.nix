@@ -2,6 +2,8 @@
   pkgs,
   lib,
   self,
+  username,
+  hostname,
   ...
 }:
 
@@ -11,7 +13,6 @@
   ];
 
   # Nix is managed by the Determinate Systems installer
-  # Nix settings (flakes, GC, etc.) are handled by Determinate's own config.
   nix.enable = false;
 
   # System
@@ -31,16 +32,16 @@
   programs.zsh.enable = true;
 
   # User account
-  users.users.sgpbyrne = {
-    name = "sgpbyrne";
-    home = "/Users/sgpbyrne";
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
   };
 
   # Primary user (required for per-user settings like homebrew, system.defaults)
-  system.primaryUser = "sgpbyrne";
+  system.primaryUser = username;
 
   # Networking
-  networking.hostName = "Seans-MacBook-Air";
+  networking.hostName = hostname;
 
   # Touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
