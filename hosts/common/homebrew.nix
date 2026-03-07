@@ -19,7 +19,6 @@
       "nikitabobko/tap/aerospace"
       "raycast"
       "orbstack"
-      "1password"
     ];
 
     brews = [

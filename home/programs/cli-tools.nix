@@ -61,6 +61,8 @@
     nodejs_22
     python313
     uv
+    jdk17
+    gradle
 
     # Nerd Fonts
     nerd-fonts.jetbrains-mono

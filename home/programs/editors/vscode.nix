@@ -46,8 +46,6 @@
         # Remote
         ms-vscode-remote.remote-containers
 
-        # Vim keybindings
-        vscodevim.vim
       ];
 
       userSettings = {

@@ -86,8 +86,8 @@
   # Zsh configuration
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = false; # Handled by Zinit plugin
-    syntaxHighlighting.enable = false; # Handled by Zinit plugin
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     history = {
       size = 50000;
@@ -158,15 +158,9 @@
         # Source Zinit
         source "''${ZINIT_HOME}/zinit.zsh"
 
-        # Zinit plugins with turbo mode
+        # Zinit plugins (completions and fzf-tab only)
         zinit ice wait lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
         zinit light zsh-users/zsh-completions
-
-        zinit ice wait lucid atload"!_zsh_autosuggest_start"
-        zinit light zsh-users/zsh-autosuggestions
-
-        zinit ice wait lucid
-        zinit light zdharma-continuum/fast-syntax-highlighting
 
         zinit ice wait lucid
         zinit light Aloxaf/fzf-tab

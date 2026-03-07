@@ -38,8 +38,17 @@ in
     golangci-lint
     go-task
 
-    # Docker
+    # Container tools
     docker-compose
+    dive
+    crane
+
+    # Kubernetes manifest tools
+    kustomize
+    kubeconform
+
+    # Secrets
+    sops
 
     # Colorized kubectl output
     kubecolor
