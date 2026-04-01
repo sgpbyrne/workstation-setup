@@ -136,7 +136,7 @@
       kgs = "kubectl get svc";
 
       # Nix
-      rebuild = "sudo darwin-rebuild switch --flake ~/dev/workstation-setup#${configName}";
+      rebuild = "sudo darwin-rebuild switch --flake ~/dev/workstation-setup#${configName} && exec zsh";
 
       # Python
       python = "python3";
