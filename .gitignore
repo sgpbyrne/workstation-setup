@@ -2,3 +2,4 @@ result
 .direnv/
 *.swp
 .DS_Store
+hosts-config.nix

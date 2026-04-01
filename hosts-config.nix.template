@@ -1,0 +1,25 @@
+# Copy this file to hosts-config.nix and fill in your values:
+#   cp hosts-config.nix.template hosts-config.nix
+#
+# hosts-config.nix is gitignored and will not be committed.
+{
+  personal-mac = {
+    hostname = "CHANGEME";
+    hostDir = ./hosts/personal-mac;
+    username = "CHANGEME";
+    gitName = "CHANGEME";
+    gitEmail = "CHANGEME";
+    clusters = [];
+  };
+
+  work-mac = {
+    hostname = "CHANGEME";
+    hostDir = ./hosts/work-mac;
+    username = "CHANGEME";
+    gitName = "CHANGEME";
+    gitEmail = "CHANGEME";
+    clusters = [
+      # { name = "my-aks-cluster"; resourceGroup = "rg-my-cluster"; subscription = "sub-id"; context = "dev"; }
+    ];
+  };
+}

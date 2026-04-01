@@ -5,34 +5,35 @@ Nix-darwin flake that manages macOS system configuration, Homebrew apps, and use
 ## Structure
 
 ```
-flake.nix                  # Entry point - mkDarwin helper, per-host configs
-hosts-config.nix           # Per-host variables
+flake.nix                   # Entry point - mkDarwin helper, per-host configs
+hosts-config.nix.template   # Template for per-host variables (copy to hosts-config.nix)
 hosts/
   common/
-    default.nix            # Shared system settings (macOS defaults, Touch ID, etc.)
-    homebrew.nix           # Shared Homebrew apps installed on all machines
+    default.nix             # Shared system settings (macOS defaults, Touch ID, etc.)
+    homebrew.nix            # Shared Homebrew apps installed on all machines
   personal-mac/
-    default.nix            # Imports common, plus host-specific overrides
-    homebrew.nix           # Personal-only apps
+    default.nix             # Imports common, plus host-specific overrides
+    homebrew.nix            # Personal-only apps
   work-mac/
-    default.nix            # Imports common, plus host-specific overrides
-    homebrew.nix           # Work-only apps
+    default.nix             # Imports common, plus host-specific overrides
+    homebrew.nix            # Work-only apps
 home/
-  default.nix              # Home Manager entry point, dotfile symlinks
-  programs.nix             # Imports all program modules
+  default.nix               # Home Manager entry point, dotfile symlinks
+  programs.nix              # Imports all program modules
   programs/
-    shell.nix              # shell configuration
-    git.nix                # Git, delta, lazygit, gh
-    tmux.nix               # Tmux config and plugins
-    cli-tools.nix          # linux cli tooling and helpers
-    devops.nix             # kubectl, helm, tenv, tflint, trivy, argocd
+    shell.nix               # shell configuration
+    git.nix                 # Git, delta, lazygit, gh
+    tmux.nix                # Tmux config and plugins
+    cli-tools.nix           # linux cli tooling and helpers
+    devops.nix              # kubectl, helm, tenv, tflint, trivy, argocd
+    kubernetes.nix          # AKS kubeconfig management (kube-init)
     editors/
-      vscode.nix           # VS Code extensions and settings
-      neovim.nix           # Neovim with LazyVim
+      vscode.nix            # VS Code extensions and settings
+      neovim.nix            # Neovim with LazyVim
 dotfiles/
-  ghostty/config           # Ghostty terminal config
+  ghostty/config            # Ghostty terminal config
   aerospace/.aerospace.toml # AeroSpace window manager config
-  nvim/                    # Neovim/LazyVim config
+  nvim/                     # Neovim/LazyVim config
 ```
 
 ## Prerequisites
@@ -42,19 +43,13 @@ dotfiles/
 
 ## First-time setup
 
-`hosts-config.nix` is tracked by git with placeholder values. Host-specific details (hostname, username, git email) are stored there so they don't end up in the commit history.
-
-After cloning, edit `hosts-config.nix` with your real values, then tell git to ignore local changes:
+Copy the template and fill in your values:
 
 ```sh
-git update-index --skip-worktree hosts-config.nix
+cp hosts-config.nix.template hosts-config.nix
 ```
 
-If you ever need to modify the template structure (add a new host, rename a field), undo it first:
-
-```sh
-git update-index --no-skip-worktree hosts-config.nix
-```
+Edit `hosts-config.nix` with your hostname, username, git email, and cluster details. This file is gitignored and will never be committed.
 
 ## Applying changes
 
@@ -150,13 +145,7 @@ mkdir hosts/<name>
 }
 ```
 
-5. Undo skip-worktree, add the new host to `hosts-config.nix`, then re-apply:
-
-```sh
-git update-index --no-skip-worktree hosts-config.nix
-```
-
-Add the new entry:
+5. Add the new host to `hosts-config.nix`:
 
 ```nix
 # hosts-config.nix
@@ -179,12 +168,11 @@ Add the configuration to `flake.nix`:
 darwinConfigurations."new-machine" = mkDarwin "new-machine" hosts.new-machine;
 ```
 
-6. Stage, test, then re-apply skip-worktree:
+6. Also add the new host entry to `hosts-config.nix.template` with placeholder values, so other users get the template. Then stage and test:
 
 ```sh
-git add hosts/<name>
+git add hosts/<name> hosts-config.nix.template
 nix flake check
-git update-index --skip-worktree hosts-config.nix
 ```
 
 ## Adding apps to a specific machine
