@@ -23,7 +23,7 @@
     gofumpt
     golines
     shfmt
-    nodePackages.prettier
+    prettier
 
     # Linters
     shellcheck

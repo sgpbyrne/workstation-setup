@@ -82,7 +82,7 @@
     gopls
     terraform-ls
     pyright
-    nodePackages.typescript-language-server
+    typescript-language-server
     lua-language-server
     yaml-language-server
   ];
