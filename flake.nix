@@ -45,6 +45,7 @@
           gitName,
           gitEmail,
           hostDir,
+          clusters ? [],
           system ? "aarch64-darwin",
         }:
         nix-darwin.lib.darwinSystem {
@@ -57,6 +58,7 @@
               username
               gitName
               gitEmail
+              clusters
               ;
             configName = name;
           };
@@ -98,6 +100,7 @@
                     username
                     gitName
                     gitEmail
+                    clusters
                     ;
                   configName = name;
                 };
