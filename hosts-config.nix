@@ -10,6 +10,7 @@
     username = "CHANGEME";
     gitName = "CHANGEME";
     gitEmail = "CHANGEME";
+    clusters = [];
   };
 
   work-mac = {
@@ -18,5 +19,17 @@
     username = "CHANGEME";
     gitName = "CHANGEME";
     gitEmail = "CHANGEME";
+    clusters = [
+      {
+        name = "cluster-1";
+        resourceGroup = "rg-cluster-1";
+      }
+      {
+        context = "dev";
+        name = "placeholder-cluster-dev";
+        resourceGroup = "rg-placeholder-dev";
+        subscription = "abc12345-6789-def0-1234-567890abcdef";
+      }
+    ];
   };
 }
