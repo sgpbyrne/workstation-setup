@@ -43,6 +43,17 @@
   # Networking
   networking.hostName = hostname;
 
+  # Extract macOS Keychain certs so Nix-installed tools trust corporate proxy CAs
+  system.activationScripts.postActivation.text = ''
+    echo "extracting macOS Keychain certificates..."
+    /usr/bin/security find-certificate -a -p /Library/Keychains/System.keychain > /etc/ssl/certs/keychain-ca-certs.pem 2>/dev/null || true
+    /usr/bin/security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain >> /etc/ssl/certs/keychain-ca-certs.pem 2>/dev/null || true
+  '';
+
+  security.pki.certificateFiles = [
+    "/etc/ssl/certs/keychain-ca-certs.pem"
+  ];
+
   # Touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 
