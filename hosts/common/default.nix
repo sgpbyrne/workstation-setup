@@ -50,6 +50,15 @@
     /usr/bin/security find-certificate -a -p /Library/Keychains/System.keychain > /etc/ssl/certs/keychain-ca-certs.pem 2>/dev/null || true
     /usr/bin/security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain >> /etc/ssl/certs/keychain-ca-certs.pem 2>/dev/null || true
     cat ${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/keychain-ca-certs.pem > /etc/ssl/certs/ca-certificates.crt 2>/dev/null || true
+
+    # Write Firefox policies (must run after Homebrew installs Firefox)
+    if [ -d "/Applications/Firefox.app" ]; then
+      echo "configuring Firefox policies..."
+      mkdir -p "/Applications/Firefox.app/Contents/Resources/distribution"
+      cat > "/Applications/Firefox.app/Contents/Resources/distribution/policies.json" << 'FIREFOXEOF'
+${builtins.readFile ../../home/programs/firefox-policies.json}
+FIREFOXEOF
+    fi
   '';
 
   # Touch ID for sudo

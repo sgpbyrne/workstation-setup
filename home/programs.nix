@@ -10,5 +10,6 @@
     ./programs/kubernetes.nix
     ./programs/editors/vscode.nix
     ./programs/editors/neovim.nix
+    ./programs/firefox.nix
   ];
 }

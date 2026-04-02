@@ -15,6 +15,7 @@
     ];
 
     casks = [
+      "firefox"
       "ghostty"
       "nikitabobko/tap/aerospace"
       "raycast"

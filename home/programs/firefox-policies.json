@@ -1,0 +1,78 @@
+{
+  "policies": {
+    "ExtensionSettings": {
+      "uBlock0@raymondhill.net": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "{446900e4-71c2-419f-a6a7-df9c091e268b}": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "addon@darkreader.org": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "{d7742d87-e61d-4b78-b8a1-b469842139fa}": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/vimium-ff/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "@testpilot-containers": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "jid1-MnnxcxisBPnSXQ@jetpack": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/json-lite/latest.xpi",
+        "installation_mode": "force_installed"
+      },
+      "{3c078156-979c-498b-8990-85f7987dd929}": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sidebery/latest.xpi",
+        "installation_mode": "force_installed"
+      }
+    },
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DisablePocket": true,
+    "NoDefaultBookmarks": true,
+    "OfferToSaveLogins": false,
+    "PasswordManagerEnabled": false,
+    "EnableTrackingProtection": {
+      "Value": true,
+      "Cryptomining": true,
+      "Fingerprinting": true
+    },
+    "DNSOverHTTPS": {
+      "Enabled": true
+    },
+    "Preferences": {
+      "browser.theme.content-theme": {
+        "Value": 0,
+        "Status": "default"
+      },
+      "extensions.activeThemeID": {
+        "Value": "firefox-compact-dark@mozilla.org",
+        "Status": "default"
+      },
+      "browser.urlbar.suggest.searches": {
+        "Value": false,
+        "Status": "default"
+      },
+      "browser.formfill.enable": {
+        "Value": false,
+        "Status": "default"
+      },
+      "browser.startup.homepage": {
+        "Value": "about:blank",
+        "Status": "default"
+      },
+      "browser.newtabpage.enabled": {
+        "Value": false,
+        "Status": "default"
+      }
+    }
+  }
+}
